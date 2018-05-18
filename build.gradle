@@ -11,6 +11,10 @@ buildscript {
 	}
 }
 
+plugins {
+    id "org.flywaydb.flyway" version "5.0.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
@@ -43,6 +47,14 @@ test {
     reports {
         html.enabled = true
     }
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost/quantified_self_java'
+    user = 'gsjava'
+    password = 'password'
+    locations = ['classpath:/db/migration']
+    baselineOnMigrate = true
 }
 
 
