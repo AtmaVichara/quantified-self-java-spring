@@ -62,7 +62,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('org.springframework.boot:spring-boot-devtools')
+    compile 'org.json:json:20171018'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
 	runtime('org.postgresql:postgresql')
 	testCompile("com.jayway.jsonpath:json-path")
     testCompile('org.junit.jupiter:junit-jupiter-api:5.2.0')
