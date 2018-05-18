@@ -11,10 +11,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 
@@ -27,6 +30,9 @@ public class MealControllerTest {
 
     @MockBean
     MealController mealController;
+
+    @MockBean
+    HttpServletResponse res;
 
     @Test
     public void getAllMeals() throws Exception {
@@ -42,7 +48,10 @@ public class MealControllerTest {
 
         given(mealController.getAllMeals()).willReturn(allMealls);
 
-        mockMvc.perform()
+        mockMvc.perform(get("/api/v1/meals"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Second Breakfast")));
 
     }
 }
